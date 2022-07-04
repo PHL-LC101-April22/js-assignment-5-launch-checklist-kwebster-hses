@@ -3,18 +3,21 @@
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
     // Here is the HTML formatting for our mission target div.
-    /*
+    let revise = document
+    revise.innerHTML=`
+    
                  <h2>Mission Destination</h2>
                  <ol>
-                     <li>Name: </li>
-                     <li>Diameter: </li>
+                     <li>Name:${name} </li>
+                     <li>Diameter:${diameter} </li>
                      <li>Star: ${star}</li>
-                     <li>Distance from Earth: </li>
-                     <li>Number of Moons: </li>
+                     <li>Distance from Earth: ${distance} </li>
+                     <li>Number of Moons: ${moons} </li>
+                     <img src = ${imageUrl}></img>
+                     
                  </ol>
-                 <img src="">
-    */
-   return 2 + 2
+                  `
+    
  }
  
  function validateInput(testInput) {
@@ -31,7 +34,20 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     
  }
  
- function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+ function formSubmission() {
+    Event.preventDefault();
+    let pilot = document.getElementByName("pilotName")
+    let pilotHtm = document.getElementById("pilotStatus")
+    pilotHtm.innerHTML = `${pilot}`
+    pilotHtm.innerHTML = `asswipe`
+    
+    console.log(pilotHtm)
+    return pilotHtm
+
+
+
+
+   /* let pilot = document.getElementByName("pilotName")
     let pilotHtm = document.getElementById("pilotStatus")
     let copilotHtm = document.getElementById("copilotStatus")
     let fuel = document.getElementById("fuelStatus")
@@ -39,9 +55,15 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     let faultyItems = document.getElementById("faultyItems")
     let launchS = document.getElementById("launchStaus")
     let launch = launchS.innerHTML
+    console.log(pilot)
+    Event.preventDefault();
+    
+    
+    
     if(validateInput(pilot) == 'Empty' || validateInput(copilot)== 'Empty'){
      alert('No Value Submitted');
-     event.preventDefault();
+     
+     
     }
     if(validateInput(pilot) == 'Not A Number'){
      pilotHtm.innerHTML = `Pilot ${pilot.value} is ready for launch`;
@@ -66,15 +88,16 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     }
  }
  
-    
+    */
  }
  
  async function myFetch() {
      let planetsReturned;
+     let json = []
  
      planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
          // TODO: do something after fetching and receiving a response
-   let json = response.json(); })}
+   json = response.json();  }); return json }
          
  
  
@@ -85,12 +108,24 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  
  
  function pickPlanet(planets) {
+    let index = 0;
+    
+    for(let i in planets){
+        index += 1
+        if(index > planets.length){
+            index -=1
+        }
+    }
+   // console.log(planets)
+    return Math.round(Math.random()*index)
+
  }
+
  
- module.exports = {
+/* module.exports = {
      addDestinationInfo: addDestinationInfo,
      validateInput: validateInput,
      formSubmission: formSubmission,
      pickPlanet: pickPlanet,
      myFetch: myFetch
-     }
+     } */
