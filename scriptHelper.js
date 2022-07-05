@@ -102,7 +102,7 @@ if(validateInput(cargoLevel.value) == 'Is a Number' ){
  
 }
 
-console.log(launchS,faultyItems.style.visibility,cargoLevel.value, "LOOK HERE" )
+
 } 
     
  }
