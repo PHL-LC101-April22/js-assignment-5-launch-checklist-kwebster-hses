@@ -26,7 +26,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
      if(!testInput){
          return 'Empty'
      }
-     if(isNaN(Number(testInput))){
+     if(isNaN(testInput) == true){
          return 'Not A Number'
      }
      else{
@@ -45,7 +45,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     let cargoS = document.getElementById("cargoStatus")
     let faultyItems = document.getElementById("faultyItems")
     let launchS = document.getElementById("launchStatus")
-    
+    faultyItems.style.visibility = "hidden"
    
     
   
@@ -66,11 +66,16 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     
     
     
-    if(validateInput(pilot.value) == 'Not A Number'){
-     pilotS.innerHTML = `Pilot ${pilot.value} is ready for launch`;
-     copilotS.innerHTML = `Pilot ${copilot.value} is ready for launch`
+    if(validateInput(pilot.value) != 'Not A Number' || validateInput(copilot.value) != 'Not A Number'){
+     pilotS.innerHTML = `Pilot ${pilot.value} is not ready for launch`;
+     copilotS.innerHTML = `Pilot ${copilot.value} is not ready for launch`
     // faultyItems.style.visibility = "visible";
+    launchS.innerHTML="Shuttle Not ready for take off"
+    launchS.style.color = "red"
+    alert('Number where a string should be')
+    
     }
+
 
     
    
@@ -85,7 +90,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
    }
         
 } 
-if(validateInput(cargoLevel.value) == 'Is a Number' ){
+if(validateInput(cargoLevel.value) == 'Is a Number' && validateInput(pilot.value) == 'Not A Number' && validateInput(copilot.value) == 'Not A Number'){
     
     if(cargoLevel.value >10000 ){
         cargoS.innerHTML = 'Cargo to Large to Voyage'
