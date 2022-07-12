@@ -45,6 +45,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     let cargoS = document.getElementById("cargoStatus")
     let faultyItems = document.getElementById("faultyItems")
     let launchS = document.getElementById("launchStatus")
+    let choice = true ;
     faultyItems.style.visibility = "hidden"
    
     
@@ -52,12 +53,14 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     
     
     if(validateInput(pilot.value) == 'Empty' || validateInput(copilot.value)== 'Empty'){
-     alert('Ensure All Fields Are Filled Correctly');
+        choice = false;
+        alert('Ensure All Fields Are Filled Correctly');
      //window.preventDefault();
      
    }
 
    if(validateInput(fuelLevel.value) == 'Empty' || validateInput(cargoLevel.value)== 'Empty'){
+    choice = false;
     alert('Ensure all fields have corresponding values');
     //window.preventDefault();
     
@@ -66,12 +69,11 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     
     
     
-    if(validateInput(pilot.value) != 'Not A Number' || validateInput(copilot.value) != 'Not A Number'){
+    if(validateInput(pilot.value) != 'Not A Number' || validateInput(copilot.value)!= 'Not A Number'){
      pilotS.innerHTML = `Pilot ${pilot.value} is not ready for launch`;
      copilotS.innerHTML = `Pilot ${copilot.value} is not ready for launch`
     // faultyItems.style.visibility = "visible";
-    launchS.innerHTML="Shuttle Not ready for take off"
-    launchS.style.color = "red"
+    choice = false;
     alert('Number where a string should be')
     
     }
@@ -83,34 +85,44 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     console.log("I AM HEre");
        if(fuelLevel.value < 10000){
         fuelS.innerHTML = ` ${fuelLevel.value} L there is not enough fuel for the journey`;
-        launchS.innerHTML="Shuttle Not ready for take off"
-        launchS.style.color = "red"
+        choice = false;
+       // launchS.innerHTML="Shuttle Not ready for take off"
+       // launchS.style.color = "red"
         
     
    }
         
 } 
-if(validateInput(cargoLevel.value) == 'Is a Number' && validateInput(pilot.value) == 'Not A Number' && validateInput(copilot.value) == 'Not A Number'){
+if(validateInput(cargoLevel.value) == 'Is a Number'){
     
     if(cargoLevel.value >10000 ){
         cargoS.innerHTML = 'Cargo to Large to Voyage'
-        launchS.innerHTML="Shuttle Not ready for take off"
-        launchS.style.color = "red"
-        faultyItems.style.visibility = "visible"
-}
+        
+        choice = false;
+    }
+
 
    if(cargoLevel.value <= 10000 ){
         cargoS.innerHTML = 'Cargo to Low enough to Voyage'
+        
+ 
+}
+ }
+    if(choice == false){
+        launchS.innerHTML="Shuttle Not ready for take off"
+        launchS.style.color = "red"
+        faultyItems.style.visibility = "visible"
+    }
+    if(choice == true){
         launchS.innerHTML="Shuttle ready for take off"
         launchS.style.color = "green"
         faultyItems.style.visibility = "visible"
- 
-}
+
+    }
 
 
 } 
-    
- }
+
 
  async function myFetch() {
      let planetsReturned;
